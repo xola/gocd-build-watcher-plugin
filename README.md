@@ -7,6 +7,8 @@ A GoCD notification plugin which sends direct emails and Slack messages to the p
 1. Drop it under `$GOCD_DIR/plugins/external`
 1. Restart Go Server
 
+**Customized specifically for Xola's Slack**
+
 ## Configuration
 
 ### Accesing pluging Settings (on GoCD)
@@ -28,7 +30,7 @@ You need to install our Slack App into your team and get an API token.
 > We will only access your team profile in order to match a email from a Material change into a Slack ID
 1. Install our app into your team: <br>[![Add to Slack](https://platform.slack-edge.com/img/add_to_slack.png)](https://slack.com/oauth/authorize?&client_id=170776918258.170870737557&scope=chat:write:bot,users:read.email,users:read)
 2. Copy your Slack API Token into GoCD's plugin configuration
-3. (optional) Configure a custom channel or slack id for the bot. If a channel is set, messages will still @mention a user. If not set, commits with an author that can't be resolved to a user in Slack will be posted to #general by default. Enter [plugin settings](#access-go-server-api) and then:
+3. (optional) Configure a custom channel or slack id for the bot. If a channel is set, messages will still @mention a user. If not set, commits with an author that can't be resolved to a user in Slack will be posted to **#dev-standup** by default. Enter [plugin settings](#access-go-server-api) and then:
 ![Settings 4](static/settings4.png)
 
 ### Adding Email notifications
@@ -41,3 +43,15 @@ You need to install our Slack App into your team and get an API token.
 - **Pipeline Broken Message**: sent to a user when a specific pipeline is broken (the build fails) by the last commit
 - **Pipeline Still Broken Message**: sent to a user when a specific pipeline was broken and the last commit didn' fix it
 - **Pipeline Fixed Message**: sent to a user when a specific pipeline was broken the last commit fixed it
+
+# Build
+
+If you want to build it yourself
+
+* Install `gradle`
+* `./gradlew` (or `gradlew.bat` for Windows)
+* See `./gradlew tasks` to see a list of tasks
+* `./gradlew jar` to build the jar
+
+The final compiled jar will be as `plugin/build/libs` as `build-watcher-plugin-0.<version>.jar` where `<version>` is
+defined by the version defined in the build.gradle file
