@@ -39,7 +39,7 @@ public class SlackNotifier implements Notifier {
         String text = user != null ?
                 message.text.replaceAll("\\b" + Pattern.quote(userEmail) + "\\b", "<@" + user.getName() + ">") :
                 message.text;
-        String channel = this.channel != null ? this.channel : user != null ? "@" + user.getName() : "#general";
+        String channel = this.channel != null ? this.channel : user != null ? "@" + user.getName() : "#rushi-test";
 
         checkResponse(() -> slack.methods().chatPostMessage(ChatPostMessageRequest.builder()
                 .token(token)
