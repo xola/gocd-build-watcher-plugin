@@ -232,10 +232,21 @@ public class BuildWatcherPlugin implements GoPlugin {
     }
 
     private String getChangesResume(PipelineInstance instance) {
-        return instance.buildCause.revisions.stream()
+        String result =  instance.buildCause.revisions.stream()
                 .flatMap($ -> $.modifications.stream())
                 .map($ -> $.revision + ":\n" + $.comment + " - " + $.userName)
                 .collect(Collectors.joining("\n\n"));
+
+       String result1[] = result.split("\n\n");
+       if (result1.length > 5) {
+           String finalResult = "";
+           for (int i = 0; i < 5; i++) {
+               finalResult = finalResult + result1[i] + "\n\n";
+           }
+           return finalResult;
+       } else {
+           return result;
+       }
     }
 
     private Message getMessage(PluginSettings settings, String userEmail, StageStatus.Pipeline pipeline, StageResult current, StageResult previous, String changesResume) {
