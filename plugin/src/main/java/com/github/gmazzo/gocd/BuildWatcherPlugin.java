@@ -237,11 +237,11 @@ public class BuildWatcherPlugin implements GoPlugin {
                 .map($ -> $.revision + ":\n" + $.comment + " - " + $.userName)
                 .collect(Collectors.joining("\n\n"));
 
-       String result1[] = result.split("\n\n");
+       String result1[] = result.split("[\n.]+");
        if (result1.length > 5) {
            String finalResult = "";
            for (int i = 0; i < 5; i++) {
-               finalResult = finalResult + result1[i] + "\n\n";
+               finalResult = finalResult + result1[i] + "\n";
            }
            return finalResult;
        } else {
